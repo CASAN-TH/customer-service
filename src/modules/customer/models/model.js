@@ -13,6 +13,7 @@ var CustomerSchema = new Schema({
     },
     tel: {
         type: String,
+        unique: true
     },
     address: {
         type: [

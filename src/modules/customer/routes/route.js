@@ -14,6 +14,9 @@ module.exports = function (app) {
         .put(controller.update)
         .delete(controller.delete);
 
+    app.route('/api/customer/add')
+        .post(controller.addCus)
+
     app.param('customerId', controller.getByID);
 
     /**
@@ -24,6 +27,6 @@ module.exports = function (app) {
      */
     // mq.consume('customer', 'created', 'created', (msg)=>{
     //     console.log(JSON.parse(msg.content));
-        
+
     // });
 }
