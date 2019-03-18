@@ -1,13 +1,13 @@
 'use strict';
 var mongoose = require('mongoose'),
-    model = require('../models/model'), 
+    model = require('../models/model'),
     mq = require('../../core/controllers/rabbitmq'),
     Customer = mongoose.model('Customer'),
     errorHandler = require('../../core/controllers/errors.server.controller'),
     _ = require('lodash');
-    
+
 exports.getList = function (req, res) {
-        Customer.find(function (err, datas) {
+    Customer.find(function (err, datas) {
         if (err) {
             return res.status(400).send({
                 status: 400,
@@ -23,9 +23,9 @@ exports.getList = function (req, res) {
 };
 
 exports.create = function (req, res) {
-        var newCustomer = new Customer(req.body);
-        newCustomer.createby = req.user;
-        newCustomer.save(function (err, data) {
+    var newCustomer = new Customer(req.body);
+    newCustomer.createby = req.user;
+    newCustomer.save(function (err, data) {
         if (err) {
             return res.status(400).send({
                 status: 400,
@@ -107,3 +107,38 @@ exports.delete = function (req, res) {
         };
     });
 };
+
+exports.addCus = function (req, res) {
+    var tel = req.body.tel
+    Customer.findOne({ tel: tel }, function (err, data) {
+        // console.log(data);
+        if (data === null) {
+            var newCustomer = new Customer(req.body);
+            newCustomer.createby = req.user;
+            newCustomer.save(function (err, newCusData) {
+                if (err) {
+                    return res.status(400).send({
+                        status: 400,
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    console.log('add customer')
+                    res.jsonp({
+                        status: 200,
+                        data: newCusData
+                    });
+                };
+            });
+        } else {
+            console.log('this data for push address');
+            console.log(data)
+            console.log(req.body)
+            res.jsonp({
+                status: 200,
+                data: "data"
+            });
+        }
+    })
+
+
+}
