@@ -5,9 +5,41 @@ var Schema = mongoose.Schema;
 
 
 var CustomerSchema = new Schema({
-    name: {
+    firstname: {
         type: String,
-        required: 'Please fill a Customer name',
+    },
+    lastname: {
+        type: String,
+    },
+    tel: {
+        type: String,
+    },
+    address: {
+        type: [
+            {
+                Houseno: {
+                    type: String
+                },
+                village: {
+                    type: String
+                },
+                street: {
+                    type: String
+                },
+                Subdistrict: {
+                    type: String
+                },
+                district: {
+                    type: String
+                },
+                province: {
+                    type: String
+                },
+                zipcode: {
+                    type: Number
+                }
+            }
+        ]
     },
     created: {
         type: Date,

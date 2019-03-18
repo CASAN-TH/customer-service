@@ -16,7 +16,20 @@ describe('Customer CRUD routes tests', function () {
 
     before(function (done) {
         mockup = {
-            name: 'name'
+            firstname: "nutnut",
+            lastname: "lertlao",
+            tel: "0896532655",
+            address: [
+                {
+                    Houseno: "55/7",
+                    village: "casa-city",
+                    street: "lumlukka Road",
+                    Subdistrict: "บึงคำพร้อย",
+                    district: "lumlukka",
+                    province: "phathumthani",
+                    zipcode: "12150"
+                }
+            ]
         };
         credentials = {
             username: 'username',
@@ -68,7 +81,16 @@ describe('Customer CRUD routes tests', function () {
                         }
                         var resp = res.body;
                         assert.equal(resp.status, 200);
-                        assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.data.firstname, mockup.firstname);
+                        assert.equal(resp.data.lastname, mockup.lastname);
+                        assert.equal(resp.data.tel, mockup.tel);
+                        assert.equal(resp.data.address[0].Houseno, mockup.address[0].Houseno);
+                        assert.equal(resp.data.address[0].village, mockup.address[0].village);
+                        assert.equal(resp.data.address[0].street, mockup.address[0].street);
+                        assert.equal(resp.data.address[0].Subdistrict, mockup.address[0].Subdistrict);
+                        assert.equal(resp.data.address[0].district, mockup.address[0].district);
+                        assert.equal(resp.data.address[0].province, mockup.address[0].province);
+                        assert.equal(resp.data.address[0].zipcode, mockup.address[0].zipcode);
                         done();
                     });
             });
@@ -86,7 +108,7 @@ describe('Customer CRUD routes tests', function () {
                     return done(err);
                 }
                 var resp = res.body;
-                assert.equal(resp.data.name, mockup.name);
+                assert.equal(resp.data.firstname, mockup.firstname);
                 done();
             });
     });
@@ -104,7 +126,7 @@ describe('Customer CRUD routes tests', function () {
                 }
                 var resp = res.body;
                 var update = {
-                    name: 'name update'
+                    firstname: 'name update'
                 }
                 request(app)
                     .put('/api/customers/' + resp.data._id)
@@ -116,7 +138,7 @@ describe('Customer CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
-                        assert.equal(resp.data.name, update.name);
+                        assert.equal(resp.data.firstname, update.firstname);
                         done();
                     });
             });
@@ -182,7 +204,7 @@ describe('Customer CRUD routes tests', function () {
                 }
                 var resp = res.body;
                 var update = {
-                    name: 'name update'
+                    firstname: 'name update'
                 }
                 request(app)
                     .put('/api/customers/' + resp.data._id)
