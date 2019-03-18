@@ -21,10 +21,10 @@ describe('Customer CRUD routes tests', function () {
             tel: "0896532655",
             address: [
                 {
-                    Houseno: "55/7",
+                    houseno: "55/7",
                     village: "casa-city",
                     street: "lumlukka Road",
-                    Subdistrict: "บึงคำพร้อย",
+                    subdistrict: "บึงคำพร้อย",
                     district: "lumlukka",
                     province: "phathumthani",
                     zipcode: "12150"
