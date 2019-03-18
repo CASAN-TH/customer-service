@@ -36,7 +36,7 @@ var CustomerSchema = new Schema({
                     type: String
                 },
                 zipcode: {
-                    type: Number
+                    type: String
                 }
             }
         ]
