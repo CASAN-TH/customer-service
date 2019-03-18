@@ -17,7 +17,7 @@ var CustomerSchema = new Schema({
     address: {
         type: [
             {
-                Houseno: {
+                houseno: {
                     type: String
                 },
                 village: {
@@ -26,7 +26,7 @@ var CustomerSchema = new Schema({
                 street: {
                     type: String
                 },
-                Subdistrict: {
+                subdistrict: {
                     type: String
                 },
                 district: {
