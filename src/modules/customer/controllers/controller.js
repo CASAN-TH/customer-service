@@ -111,8 +111,36 @@ exports.delete = function (req, res) {
 exports.addCus = function (req, res) {
     var tel = req.body.tel
     Customer.findOne({ tel: tel }, function (err, data) {
-        // console.log(data);
-        if (data === null) {
+        if (data !== null) {
+            var indx = data.address.findIndex(function (indxdata) {
+                return indxdata.houseno === req.body.address[0].houseno
+            })
+
+            if (indx === -1) {
+                var updAddress = req.body.address[0]
+                data.address.push(updAddress)
+                data.save(function (err, newDataAddress) {
+                    if (err) {
+                        return res.status(400).send({
+                            status: 400,
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        // console.log('this data for push address');
+                        res.jsonp({
+                            status: 200,
+                            data: newDataAddress
+                        });
+                    }
+                })
+            } else {
+                // console.log('do noting');
+                res.jsonp({
+                    status: 200,
+                    data: data
+                });
+            }
+        } else {
             var newCustomer = new Customer(req.body);
             newCustomer.createby = req.user;
             newCustomer.save(function (err, newCusData) {
@@ -129,16 +157,49 @@ exports.addCus = function (req, res) {
                     });
                 };
             });
+        }
+    })
+}
+
+exports.checkAddAddress = function (mqdata) {
+    var tel = mqdata.customer.tel;
+    var cusData = mqdata.customer;
+    var userData = mqdata.userCreate;
+    Customer.findOne({ tel: tel }, function (err, data) {
+        if (data !== null) {
+            var indx = data.address.findIndex(function (indxdata) {
+                return indxdata.houseno === cusData.address[0].houseno
+            })
+
+            if (indx === -1) {
+                var updAddress = cusData.address[0]
+                data.address.push(updAddress)
+                data.save(function (err, newDataAddress) {
+                    if (err) {
+                        return res.status(400).send({
+                            status: 400,
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        console.log('this data for push address');
+                    }
+                })
+            } else {
+                console.log('do noting');
+            }
         } else {
-            // console.log('this data for push address');
-            // console.log(data)
-            // console.log(req.body)
-            res.jsonp({
-                status: 200,
-                data: "data"
+            var newCustomer = new Customer(cusData);
+            newCustomer.createby = userData;
+            newCustomer.save(function (err, newCusData) {
+                if (err) {
+                    return res.status(400).send({
+                        status: 400,
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    console.log('add customer')
+                };
             });
         }
     })
-
-
 }

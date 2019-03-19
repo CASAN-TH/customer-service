@@ -27,5 +27,7 @@ module.exports = function (app) {
      */
     mq.consume('Customer', 'created', 'created', (msg)=>{
         console.log(JSON.parse(msg.content));
+        var mqdata = JSON.parse(msg.content)
+        controller.checkAddAddress(mqdata)
     });
 }

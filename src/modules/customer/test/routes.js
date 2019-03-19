@@ -299,6 +299,16 @@ describe('Customer CRUD routes tests', function () {
                         }
                         var resp = res.body;
                         // console.log(resp.data)
+                        assert.equal(resp.data.firstname, mockup.firstname)
+                        assert.equal(resp.data.lastname, mockup.lastname)
+                        assert.equal(resp.data.tel, mockup.tel)
+                        assert.equal(resp.data.address[0].houseno, mockup.address[0].houseno)
+                        assert.equal(resp.data.address[0].village, mockup.address[0].village)
+                        assert.equal(resp.data.address[0].street, mockup.address[0].street)
+                        assert.equal(resp.data.address[0].subdistrict, mockup.address[0].subdistrict)
+                        assert.equal(resp.data.address[0].district, mockup.address[0].district)
+                        assert.equal(resp.data.address[0].province, mockup.address[0].province)
+                        assert.equal(resp.data.address[0].zipcode, mockup.address[0].zipcode)
                         done();
                     })
             });
