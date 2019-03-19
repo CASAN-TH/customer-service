@@ -113,7 +113,7 @@ exports.addCus = function (req, res) {
     Customer.findOne({ tel: tel }, function (err, data) {
         if (data !== null) {
             var indx = data.address.findIndex(function (indxdata) {
-                return indxdata.houseno === req.body.address[0].houseno
+                return indxdata.houseno === req.body.address[0].houseno && indxdata.zipcode === req.body.address[0].zipcode
             })
 
             if (indx === -1) {
@@ -168,7 +168,7 @@ exports.checkAddAddress = function (mqdata) {
     Customer.findOne({ tel: tel }, function (err, data) {
         if (data !== null) {
             var indx = data.address.findIndex(function (indxdata) {
-                return indxdata.houseno === cusData.address[0].houseno
+                return indxdata.houseno === cusData.address[0].houseno && indxdata.zipcode === cusData.address[0].zipcode
             })
 
             if (indx === -1) {
