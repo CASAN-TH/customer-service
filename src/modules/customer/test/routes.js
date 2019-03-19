@@ -298,7 +298,7 @@ describe('Customer CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
-                        console.log(resp.data)
+                        // console.log(resp.data)
                         done();
                     })
             });

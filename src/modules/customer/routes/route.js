@@ -25,8 +25,7 @@ module.exports = function (app) {
      * qname : ชื่อสถานีย่อย สาขา
      * keymsg : ชื่อผู้รับ
      */
-    // mq.consume('customer', 'created', 'created', (msg)=>{
-    //     console.log(JSON.parse(msg.content));
-
-    // });
+    mq.consume('Customer', 'created', 'created', (msg)=>{
+        console.log(JSON.parse(msg.content));
+    });
 }

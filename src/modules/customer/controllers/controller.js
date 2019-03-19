@@ -122,7 +122,7 @@ exports.addCus = function (req, res) {
                         message: errorHandler.getErrorMessage(err)
                     });
                 } else {
-                    console.log('add customer')
+                    // console.log('add customer')
                     res.jsonp({
                         status: 200,
                         data: newCusData
@@ -130,9 +130,9 @@ exports.addCus = function (req, res) {
                 };
             });
         } else {
-            console.log('this data for push address');
-            console.log(data)
-            console.log(req.body)
+            // console.log('this data for push address');
+            // console.log(data)
+            // console.log(req.body)
             res.jsonp({
                 status: 200,
                 data: "data"
