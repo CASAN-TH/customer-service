@@ -30,4 +30,10 @@ module.exports = function (app) {
         var mqdata = JSON.parse(msg.content)
         controller.checkAddAddress(mqdata)
     });
+
+    mq.consume('HistoryBuy', 'orders', 'orders', (msg)=>{
+        console.log(JSON.parse(msg.content));
+        var mqdata = JSON.parse(msg.content)
+        controller.addHistoryBuy(mqdata)
+    });
 }
