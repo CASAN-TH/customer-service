@@ -42,6 +42,51 @@ var CustomerSchema = new Schema({
             }
         ]
     },
+    historybuy: {
+        type: [
+            {
+                date: {
+                    type: String
+                },
+                items: {
+                    type: [
+                        {
+                            name: {
+                                type: String
+                            },
+                            option: {
+                                type: [
+                                    {
+                                        name: {
+                                            type: String
+                                        },
+                                        value: {
+                                            type: [
+                                                {
+                                                    name: {
+                                                        type: String
+                                                    },
+                                                    qty: {
+                                                        type: Number
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                    }
+                                ]
+                            },
+                            price: {
+                                type: Number
+                            },
+                            amount: {
+                                type: Number
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
     created: {
         type: Date,
         default: Date.now

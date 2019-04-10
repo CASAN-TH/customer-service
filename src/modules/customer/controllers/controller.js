@@ -202,4 +202,35 @@ exports.checkAddAddress = function (mqdata) {
             });
         }
     })
+};
+
+exports.addHistoryBuy = function (mqdatas) {
+    // console.log(mqdatas)
+    for (let i = 0; i < mqdatas.length; i++) {
+        var mqdata = mqdatas[i];
+        var tel = mqdata.customer.tel;
+        var items = mqdata.items
+        var d = new Date()
+        var dateText = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear() + " " + (d.getHours() + 7) + ":" + d.getMinutes()
+        // console.log(dateText)
+
+        Customer.findOneAndUpdate(
+            {
+                tel: tel
+            },
+            {
+                $push: {
+                    historybuy: {
+                        date: dateText,
+                        items: items
+                    }
+                }
+            },
+            {
+                new: true
+            },
+            function (err, data) {
+                // console.log(data)
+            })
+    }
 }
